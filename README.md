@@ -29,9 +29,24 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
+
+A token is used to authencticate a user. A token is typically generated on the backend when the user makes a POST request to the server's login route. Then, the generated token gets forwarded
+to the frontend, and it gets stored either as a cookie or in local storage. Finally, on every subsequent request made to the server, the stored token is sent along with it.
+
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+One step you can take is to create protected routes. A protected route is one in which the user can't access unless they're logged in. Another step you can take is to hash a user's password and other sensitive data before storing it in your database. This protects against potential data leaks from a malicious attack or otherwise.
+
 - [ ] Describe how web servers work.
+
+A server typically listens for requests on a port, and _serves_ data -- either JSON, XML, plain text or html -- when a request comes in.
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+  + CREATE - POST
+  + READ - GET
+  + UPDATE - PUT
+  + DELETE - DELETE
 
 
 ## Project Set Up
