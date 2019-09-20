@@ -12,7 +12,7 @@ const BubblePage = () => {
       .then(res => {
         setColorList(res.data)
       })
-  }, [])
+  }, [colorList])
 
   return (
     <>
