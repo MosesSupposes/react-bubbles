@@ -8,8 +8,7 @@ const Login = props => {
     username: '',
     password: ''
   }
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+  
   const [login,, handleChange] = useInput(initialState)
   
   const handleSubmit = ev => {
