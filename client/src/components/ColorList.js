@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import axios from "axios"
 import axiosWithAuth from "../utils/axiosWithAuth"
 
 const initialColor = {
@@ -8,19 +7,32 @@ const initialColor = {
 }
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors)
   const [editing, setEditing] = useState(false)
   const [colorToEdit, setColorToEdit] = useState(initialColor)
+  const [newColor, setNewColor] = useState(initialColor)
 
   const editColor = color => {
     setEditing(true)
     setColorToEdit(color)
   }
 
+  const addColor = e => {
+    e.preventDefault()
+
+    axiosWithAuth()
+      .post('/colors', newColor)
+      .then(res => {
+        setNewColor(initialColor)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
   
   const saveEdit = e => {
     e.preventDefault()
-    
+
     const id = 
       [colors.find(color => color.id === colorToEdit.id)]
       .map(color => color.id)[0]
@@ -68,6 +80,37 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+
+      <form onSubmit={addColor}>
+          <legend>add new color</legend>
+          <label>
+            color name:
+            <input 
+              onChange={e => {
+                setNewColor({...newColor, color: e.target.value})
+              }}
+              value={newColor.color} 
+            />
+          </label>
+          <label>
+            hex code:
+            <input 
+              onChange={e => {
+                setNewColor({...newColor, code: { hex: e.target.value }})
+              }}
+              value={newColor.code.hex} 
+            />
+          </label>
+          <div className="button-row">
+            <button 
+              type="submit"
+              onClick={addColor}
+            >
+              +
+            </button>
+          </div>
+      </form>
+      
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
